@@ -28,16 +28,13 @@ There are many reasons to switch to Victoria Metrics. Compared to other products
 > VictoriaMetrics wins InfluxDB and Timescale in all the queries by a margin of up to 20x. It especially excels at heavy queries, which scan many millions of datapoints across thousands of distinct timeseries. More info here 
 [VictoriaMetrics vs. InfluxDB vs. Timescale](https://valyala.medium.com/when-size-matters-benchmarking-victoriametrics-vs-timescale-and-influxdb-6035811952d4)
 
-
 This add-on continues the work of Andreas Habel whose [hassio-victoriametrics](https://github.com/Exceptionfault/hassio-victoriametrics) add-on was not updated since 2021.
 I developed this mainly for my purpose running VictoriaMetrics on my Raspberry Pi 4 running Home Assistant Operating System.
 The direction of InfluxDB 2.0 was not what I wanted in combination with Grafana so VictoriaMetrics Time Series Database was the best choice.
 
 ## Installation and configuration
 
-1. Add the reposity. (Quick link: [![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/) )
-    * **Add the reposity** (click 3 dots on the top right of the screen). Reposity URL: *https://github.com/fuslwusl/homeassistant-addon-victoriametrics*
-    * Refresh/reload your browser tab/window
+1. Add the repository: [![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Flapo-luchini%2Fhomeassistant-addon-vmagent)
 2. **Install** the add-on:
     * Find, and **install** the Victoria Metrics add-on
 3. Read the add-on documentation in the *Victoria Metrics* **documentation** tab
