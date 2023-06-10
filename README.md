@@ -4,7 +4,7 @@ If you are looking for an efficient and easy to use way for long term storage of
 
 This add-on makes it easy to scrape (i.e. fetch) metrics locally, cache them in a temporary database, and send them to your centralized Victoria Metrics Time Series Database as soon as is is reachable, thus allowing to have full data even if the database is down or unreachable at times.
 
-This works on Home Assistant OS on ARM64 systems like Raspberry Pi 4 or AMD64.
+This add-on runs on ARM64 systems like Raspberry Pi 4 and many others (armhf, armv7, aarch64, amd64).
 
 ## Replacement for InfluxDB and Prometheus
 

@@ -26,6 +26,6 @@ then
 fi
 
 
-bashio::log.info "Starting Victoria Metrics with retention set to $RETENTION"
-bashio::log.info "Starting Victoria Metrics with args set to $ARGS"
-"/victoria-metrics-prod" "-storageDataPath" "/share/victoria-metrics-data" -retentionPeriod $RETENTION $HTTPAUTHARGS $PROMETHEUSARGS $ARGS
+bashio::log.info "Starting Victoria Metrics with remote write to $RETENTION"
+bashio::log.info "Starting Victoria Metrics Agent with args set to $ARGS"
+"/vmagent-prod" "-storageDataPath" "/share/vmagent-data" -retentionPeriod $RETENTION $HTTPAUTHARGS $PROMETHEUSARGS $ARGS
