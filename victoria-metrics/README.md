@@ -35,6 +35,7 @@ The direction of InfluxDB 2.0 was not what I wanted in combination with Grafana 
 ## Installation and configuration
 
 1. Add the repository: [![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Flapo-luchini%2Fhomeassistant-addon-vmagent)
+1. **Press** "add"
 2. **Install** the add-on:
     * Find, and **install** the Victoria Metrics Agent add-on
 3. Read the add-on documentation in the *Victoria Metrics* **documentation** tab
