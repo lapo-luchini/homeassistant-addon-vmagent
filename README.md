@@ -1,8 +1,10 @@
-# Home Assistant Add-on VictoriaMetrics Time Series Database
+# Home Assistant Add-on to send to VictoriaMetrics Time Series Database
 
 If you are looking for an efficient and easy to use way for long term storage of your Home Assistant data - just use VictoriaMetrics.
 
-This add-on makes it easy to run a Victoria Metrics Time Series Database on Home Assistant OS on ARM64 systems like Raspberry Pi 4 or AMD64.
+This add-on makes it easy to scrape (i.e. fetch) metrics locally, cache them in a temporary database, and send them to your centralized Victoria Metrics Time Series Database as soon as is is reachable, thus allowing to have full data even if the database is down or unreachable at times.
+
+This works on Home Assistant OS on ARM64 systems like Raspberry Pi 4 or AMD64.
 
 ## Replacement for InfluxDB and Prometheus
 
@@ -22,7 +24,6 @@ There are many reasons to switch to Victoria Metrics. Compared to other products
 * ease of use
 
 [Victoria Metrics on GitHub](https://github.com/VictoriaMetrics/VictoriaMetrics)
-
 
 > VictoriaMetrics wins InfluxDB and Timescale in all the queries by a margin of up to 20x. It especially excels at heavy queries, which scan many millions of datapoints across thousands of distinct timeseries. More info here 
 [VictoriaMetrics vs. InfluxDB vs. Timescale](https://valyala.medium.com/when-size-matters-benchmarking-victoriametrics-vs-timescale-and-influxdb-6035811952d4)
