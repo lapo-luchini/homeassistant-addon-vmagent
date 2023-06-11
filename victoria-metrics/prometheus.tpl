@@ -16,10 +16,9 @@ scrape_configs:
     scrape_interval: '{{.prometheusScrapeInterval}}'
     scrape_timeout: '{{.prometheusScrapeTimeout}}'
     metrics_path: /api/prometheus
-    bearer_token: '{{.token}}'
-    #authorization:
-    #  credentials: "{{.token}}"
-    scheme: { { .scheme } }
+    authorization:
+      credentials: "{{.token}}"
+    scheme: {{ .scheme }}
     static_configs:
       - targets:
           - hassio:80
