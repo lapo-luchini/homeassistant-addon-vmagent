@@ -19,7 +19,7 @@ init: false
 map:
   - share:rw
 options:
-  retention: "99y"
+  remoteWriteURL: ""
   additionalArguments: ""
   enableHTTPAuth: false
   username: ""
@@ -31,7 +31,7 @@ options:
   longelivedToken: ""
   homeassistantUrl: ""
 schema:
-  retention: "str?"
+  remoteWriteURL: "str?"
   additionalArguments: "str?"
   enableHTTPAuth: bool
   username: "str?"
