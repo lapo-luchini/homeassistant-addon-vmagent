@@ -28,4 +28,4 @@ fi
 
 bashio::log.info "Starting Victoria Metrics with remote write to $REMOTE_URL"
 bashio::log.info "Starting Victoria Metrics Agent with args set to $ARGS"
-"/vmagent-prod" "-storageDataPath" "/share/vmagent-data" --remoteWrite.url $REMOTE_URL $HTTPAUTHARGS $PROMETHEUSARGS $ARGS
+/vmagent-prod -remoteWrite.tmpDataPath /share/vmagent-data -remoteWrite.url "$REMOTE_URL" $HTTPAUTHARGS $PROMETHEUSARGS $ARGS
