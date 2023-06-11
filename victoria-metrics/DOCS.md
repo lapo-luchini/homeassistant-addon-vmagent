@@ -43,7 +43,7 @@ With the option `measurement_attr: entity_id` you will get the `entity_id` as me
 influxdb:
   api_version: 1
   host: <<<ADD-ON HOSTNAME FROM ADD-ON PAGE>>>
-  port: 8428
+  port: 8429
   max_retries: 3
   measurement_attr: entity_id
   tags_attributes:
