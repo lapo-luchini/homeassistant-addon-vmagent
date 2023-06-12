@@ -10,7 +10,7 @@ scrape_configs:
       - targets:
           - localhost:8429
         labels:
-          instance: '{{.homeassistantUrl}}:8429'
+          instance: '{{.homeassistantUrl | regex_replace(":[0-9]+$", ":8429")}}'
 
   - job_name: 'home-assistant'
     scrape_interval: '{{.prometheusScrapeInterval}}'
@@ -21,6 +21,4 @@ scrape_configs:
     scheme: {{ .scheme }}
     static_configs:
       - targets:
-          - hassio:80
-        labels:
-          instance: '{{.homeassistantUrl}}:8123'
+          - '{{.homeassistantUrl}}'
