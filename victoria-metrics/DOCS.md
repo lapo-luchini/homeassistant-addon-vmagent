@@ -105,7 +105,6 @@ influxdb:
       - binary_sensor.*_internet_access
 ```
 
-<!-- not availalbe yet
 ## Scraping data from HomeAssistant
 To scrape data from HomeAssistant, you can use the `Prometheus` exporter. Add the following code to you `configuration.yaml`.
 
@@ -146,8 +145,6 @@ prometheus:
 
 Finally check the `prometheus.yml` of this addon and adjust IP of your installation. 
 Also make sure to create a long-living token as `bearer_token` for authentication.
--->
-
 
 ### Grafana
 
