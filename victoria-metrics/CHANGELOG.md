@@ -1,3 +1,7 @@
+## 1.8.20.1
+
+- Updated to VictoriaMetrics Agent 1.97.2 (LTS)
+
 ## 1.8.20
 
 - Updated to VictoriaMetrics 1.91.2
