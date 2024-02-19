@@ -5,7 +5,7 @@ FROM $BUILD_FROM
 COPY start-vmagent /
 COPY prometheus.tpl /
 WORKDIR /share/vmagent-data
-ARG VERSION=v1.91.2
+ARG VERSION=v1.97.2
 
 RUN /bin/bash -c 'set -ex && \
     ARCH=$(uname -m) && \
