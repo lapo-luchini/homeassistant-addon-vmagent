@@ -14,6 +14,9 @@ configuration:
   password:
     name: Password
     description: Password for the basicAuth/httpAuth (has no effect if HTTPAuth is not enabled).
+  enableNodeExporterScrape:
+    name: Enable Node Exporter scrape
+    description: If set to true, a Prometheus scrape for Node Exporter will be configured in Victoria Metrics. https://github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter
   enablePrometheusScrape:
     name: Enable Prometheus scrape
     description: If set to true, a Prometheus scrape for Home Assistant will be configured in Victoria Metrics. https://www.home-assistant.io/integrations/prometheus

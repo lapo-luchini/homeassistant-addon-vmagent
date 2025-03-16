@@ -12,6 +12,14 @@ scrape_configs:
         labels:
           instance: '{{regexReplaceAll ":[0-9]+$" .homeassistantUrl ":8429"}}'
 
+{{if .enableNodeExporterScrape}}
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets:
+          - '{{regexReplaceAll ":[0-9]+$" .homeassistantUrl ":9100"}}'
+{{end}}
+
+{{if .enablePrometheusScrape}}
   - job_name: 'home-assistant'
     scrape_interval: '{{.prometheusScrapeInterval}}'
     scrape_timeout: '{{.prometheusScrapeTimeout}}'
@@ -22,3 +30,4 @@ scrape_configs:
     static_configs:
       - targets:
           - '{{.homeassistantUrl}}'
+{{end}}

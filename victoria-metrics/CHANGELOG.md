@@ -1,6 +1,11 @@
+## 1.8.20.3
+
+- Updated to VictoriaMetrics Agent 1.113.0
+- Optionally support scraping for [Node Exporter](https://github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter)
+
 ## 1.8.20.2
 
-- Updated to VictoriaMetrics Agent 1.112.0 (LTS)
+- Updated to VictoriaMetrics Agent 1.112.0
 
 ## 1.8.20.1
 
@@ -48,7 +53,7 @@
 ## 1.8.10
 
 - Updated documentation and added Grafana tips
-- Replace binary from docker image victoriametrics/victoria-metrics:v1.81.2 with official build https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/v1.81.2/victoria-metrics-linux-arm-v1.81.2.tar.gz
+- Replace binary from docker image victoriametrics/victoria-metrics:v1.81.2 with [official build](https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/v1.81.2/victoria-metrics-linux-arm-v1.81.2.tar.gz)
 
 ## 1.8.9
 

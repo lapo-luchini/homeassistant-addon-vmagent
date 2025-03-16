@@ -1,5 +1,5 @@
 name: Victoria Metrics Agent add-on
-version: "1.8.20.2"
+version: "1.8.20.3"
 slug: victoria_metrics_agent
 description: Victoria Metrics Agent add-on for long term storage as replacement for Prometheus and InfluxDB
 webui: "http://[HOST]:[PORT:8429]/"
@@ -24,6 +24,7 @@ options:
   enableHTTPAuth: false
   username: ""
   password: ""
+  enableNodeExporterScrape: false
   enablePrometheusScrape: false
   prometheusScrapeHTTPS: false
   prometheusScrapeInterval: "20s"
@@ -36,6 +37,7 @@ schema:
   enableHTTPAuth: bool
   username: "str?"
   password: "password?"
+  enableNodeExporterScrape: bool
   enablePrometheusScrape: bool
   prometheusScrapeHTTPS: bool
   prometheusScrapeInterval: "str?"
