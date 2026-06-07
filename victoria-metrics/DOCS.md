@@ -15,23 +15,26 @@ Otherwise:
 Once the add-on is installed:
 
 * Read the add-on documentation
-* Check the configuration page of the add-on to change retention time - default is 99 years
 * Now you can press Start - the first start can take a minute or two
-* When the green circle shows up victoriametrics is running and ready for your data
+* When the green circle shows up vmagent is running and ready to forward your data
 * Add influxdb integration to your homeassistant config (using the option `measurement_attr: entity_id` is recommended)
 * Restart Home Assistant
 
 
 ## Data Storage
-VictoriaMetrtics Data is stored in folder /share/victoria-metrics-data of Home Assistant OS to make individual backups easy.
+vmagent stores its remote-write queue in the add-on `/data/vmagent-data` directory. This is not a full VictoriaMetrics database; it is temporary persistent queue data used while the remote storage is unavailable.
 
 
 ## Configuration
 
-### Retention
-To define the retention, that is how long VictoriaMetrics will keep it's data, set it to a number in months. You can also use value like for example `30d`, `6m` or `3y`.
+### Remote write URL
+Set `remoteWriteURL` to the VictoriaMetrics remote write endpoint, for example:
 
-See: https://github.com/VictoriaMetrics/VictoriaMetrics#retention
+```http
+http://victoriametrics:8428/api/v1/write
+```
+
+Use `additionalArguments` for extra vmagent flags when needed.
 
 
 ### Sending data to VictoriaMetrics
@@ -178,4 +181,3 @@ Or you can only change the name of one metric/entity:
 
 Query / Field: Legend  
 ```{{friendly_name}}```
-

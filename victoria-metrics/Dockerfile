@@ -1,26 +1,40 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:3.23
+
+SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 
 # Copy data for add-on
 COPY start-vmagent /
 COPY prometheus.tpl /
-WORKDIR /share/vmagent-data
-ARG VERSION=v1.132.0
+WORKDIR /data
 
-RUN /bin/bash -c 'set -ex && \
-    ARCH=$(uname -m) && \
-    if [ "$ARCH" == "x86_64" ]; then \
-        wget https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/$VERSION/vmutils-linux-amd64-$VERSION.tar.gz -qO- | tar xvz -C / vmagent-prod; \
-    elif [[ "$ARCH" == "arm"* ]]; then \
-        wget https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/$VERSION/vmutils-linux-arm-$VERSION.tar.gz -qO- | tar xvz -C / vmagent-prod; \
-    elif [ "$ARCH" == "aarch64" ]; then \
-        wget https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/$VERSION/vmutils-linux-arm64-$VERSION.tar.gz -qO- | tar xvz -C / vmagent-prod; \
-    else \
-        echo "Unsupported architecture $ARCH"; \
-        return -1; \
-    fi'
+ARG BUILD_ARCH
+ARG BUILD_VERSION=dev
+ARG TARGETARCH
+ARG VICTORIAMETRICS_VERSION=1.132.0
 
-RUN chmod a+x /vmagent-prod
-RUN chmod a+x /start-vmagent
+LABEL \
+    io.hass.version="${BUILD_VERSION}" \
+    io.hass.type="app" \
+    io.hass.arch="${BUILD_ARCH}" \
+    org.opencontainers.image.source="https://github.com/lapo-luchini/homeassistant-addon-vmagent"
 
-CMD [ "/start-vmagent"]
+RUN \
+    apk add --no-cache \
+        ca-certificates \
+        jq \
+        tar \
+        wget \
+    && HA_ARCH="${BUILD_ARCH:-${TARGETARCH}}" \
+    && case "${HA_ARCH}" in \
+        amd64) VM_ARCH="amd64" ;; \
+        aarch64|arm64) VM_ARCH="arm64" ;; \
+        *) echo "Unsupported architecture: ${HA_ARCH}" >&2; exit 1 ;; \
+    esac \
+    && VM_VERSION="v${VICTORIAMETRICS_VERSION}" \
+    && wget -qO /tmp/vmutils.tar.gz \
+        "https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/${VM_VERSION}/vmutils-linux-${VM_ARCH}-${VM_VERSION}.tar.gz" \
+    && tar -xzf /tmp/vmutils.tar.gz -C / vmagent-prod \
+    && rm -f /tmp/vmutils.tar.gz \
+    && chmod a+x /vmagent-prod /start-vmagent
+
+CMD ["/start-vmagent"]

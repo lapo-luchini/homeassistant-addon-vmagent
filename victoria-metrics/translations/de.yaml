@@ -1,7 +1,4 @@
 configuration:
-  retention:
-    name: Retention
-    description: Legt die Dauer für die Aufbewahrung von Daten in Monaten fest. Die Angabe der Dauer kann aber auch in Tagen oder Jahren erfolgen - z. B. `2y` oder `30d`.
   additionalArguments:
     name: Additional Arguments
     description: Definiert additional arguments, siehe auch https://github.com/VictoriaMetrics/VictoriaMetrics oder in der Victoria Metrics Dokumentation.
@@ -14,6 +11,9 @@ configuration:
   password:
     name: Passwort
     description: Password für den basicAuth/HTTPAuth (hat keinen Effekt, wenn basicAuth/HTTPAuth nicht aktiviert ist).
+  enableNodeExporterScrape:
+    name: Node Exporter scrape aktivieren
+    description: Wenn aktiv, wird ein Prometheus scrape für Node Exporter in Victoria Metrics konfiguriert. https://github.com/loganmarchione/hassos-addons/tree/main/prometheus_node_exporter
   enablePrometheusScrape:
     name: Aktiviert Prometheus scrape
     description: Wenn aktiv, wird ein Prometheus scrape für Home Assistant in Victoria Metrics hinzugefügt. https://www.home-assistant.io/integrations/prometheus

@@ -1,3 +1,10 @@
+## 1.132.1
+
+- Fixed local builds on Supervisor 2026.04.0+ by using an explicit Home Assistant base image.
+- Updated the image build to use current Home Assistant multi-arch base images and `BUILD_ARCH`.
+- Moved vmagent temporary data to the add-on `/data` volume.
+- Disabled the host port by default; ingress remains enabled for the web UI.
+
 ## 1.132.0
 
 - Updated to VictoriaMetrics Agent 1.132.0

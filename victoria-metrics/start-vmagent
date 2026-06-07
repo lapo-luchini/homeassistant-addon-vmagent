@@ -4,25 +4,54 @@ set -e
 REMOTE_URL=$(bashio::config 'remoteWriteURL')
 ARGS=$(bashio::config 'additionalArguments')
 
+if [[ -z "${REMOTE_URL}" ]]; then
+    bashio::log.fatal "remoteWriteURL must be configured"
+    exit 1
+fi
 
-HTTPAUTHARGS=""
+CMD=(/vmagent-prod -remoteWrite.tmpDataPath /data/vmagent-data -remoteWrite.url "${REMOTE_URL}")
 if bashio::config.true 'enableHTTPAuth'
 then
     bashio::log.info "Use httpAuth for Victoria Metrics"
-    HTTPAUTHARGS="-httpAuth.username=$(bashio::config 'username') -httpAuth.password=$(bashio::config 'password')"
+    CMD+=(
+        "-httpAuth.username=$(bashio::config 'username')"
+        "-httpAuth.password=$(bashio::config 'password')"
+    )
 fi
 
-PROMETHEUSARGS=""
 bashio::log.info "Use promscrape config for Victoria Metrics"
 SCHEME="http"
 if bashio::config.true 'prometheusScrapeHTTPS'
 then
     SCHEME="https"
 fi
-echo '{"token": "'$(bashio::config 'longelivedToken')'", "scheme": "'$SCHEME'", "homeassistantUrl": "'$(bashio::config 'homeassistantUrl')'", "prometheusScrapeInterval": "'$(bashio::config 'prometheusScrapeInterval')'", "prometheusScrapeTimeout": "'$(bashio::config 'prometheusScrapeTimeout')'", "enablePrometheusScrape": '$(bashio::config 'enablePrometheusScrape')', "enableNodeExporterScrape": '$(bashio::config 'enableNodeExporterScrape')'}' | tempio -template /prometheus.tpl -out /prometheus.yml
-PROMETHEUSARGS="-promscrape.config /prometheus.yml"
 
+jq -n \
+    --arg token "$(bashio::config 'longelivedToken')" \
+    --arg scheme "${SCHEME}" \
+    --arg homeassistantUrl "$(bashio::config 'homeassistantUrl')" \
+    --arg prometheusScrapeInterval "$(bashio::config 'prometheusScrapeInterval')" \
+    --arg prometheusScrapeTimeout "$(bashio::config 'prometheusScrapeTimeout')" \
+    --argjson enablePrometheusScrape "$(bashio::config 'enablePrometheusScrape')" \
+    --argjson enableNodeExporterScrape "$(bashio::config 'enableNodeExporterScrape')" \
+    '{
+        token: $token,
+        scheme: $scheme,
+        homeassistantUrl: $homeassistantUrl,
+        prometheusScrapeInterval: $prometheusScrapeInterval,
+        prometheusScrapeTimeout: $prometheusScrapeTimeout,
+        enablePrometheusScrape: $enablePrometheusScrape,
+        enableNodeExporterScrape: $enableNodeExporterScrape
+    }' \
+    | tempio -template /prometheus.tpl -out /prometheus.yml
+
+CMD+=(-promscrape.config /prometheus.yml)
 
 bashio::log.info "Starting Victoria Metrics with remote write to $REMOTE_URL"
-bashio::log.info "Starting Victoria Metrics Agent with args set to $ARGS"
-/vmagent-prod -remoteWrite.tmpDataPath /share/vmagent-data -remoteWrite.url "$REMOTE_URL" $HTTPAUTHARGS $PROMETHEUSARGS $ARGS
+if [[ -n "${ARGS}" ]]; then
+    bashio::log.info "Starting Victoria Metrics Agent with additional arguments"
+    exec "${CMD[@]}" ${ARGS}
+fi
+
+bashio::log.info "Starting Victoria Metrics Agent"
+exec "${CMD[@]}"

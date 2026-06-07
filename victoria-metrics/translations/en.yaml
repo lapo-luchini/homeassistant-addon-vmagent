@@ -1,7 +1,4 @@
 configuration:
-  retention:
-    name: Retention
-    description: Defines the retention in month to store data. You can also use years or days for example `2y` or `30d`.
   additionalArguments:
     name: Additional Arguments
     description: Defines additional arguments, checkout https://github.com/VictoriaMetrics/VictoriaMetrics or the Victoria Metrics documentation.
